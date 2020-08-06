@@ -45,10 +45,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         checkPermission(this)
-        // 在 11 上创建一个文件 这样是不能成功的，已经不支持这样操作
-        val file = File(Environment.getExternalStorageDirectory(), "mars.txt")
-        file.createNewFile()
-        //
     }
 
 
@@ -65,14 +61,26 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun checkPermission(actvity: Activity): Boolean {
-        if (actvity.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            actvity.requestPermissions(
+    private fun checkPermission(activity: Activity): Boolean {
+        if (activity.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            activity.requestPermissions(
                 Array(2) { Manifest.permission.WRITE_EXTERNAL_STORAGE; Manifest.permission.READ_EXTERNAL_STORAGE },
                 1
             )
         }
         return false
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        // 在 11 上创建一个文件 这样是不能成功的，已经不支持这样操作
+//        val file = File(Environment.getExternalStorageDirectory(), "mars.txt")
+//        file.createNewFile()
+        //
     }
 
     /**
@@ -93,8 +101,10 @@ class MainActivity : AppCompatActivity() {
 
         if (result == null) {
             // 失败
+            Toast.makeText(this, "文件夹创建成功", Toast.LENGTH_LONG).show()
         } else {
             // 成功
+            Toast.makeText(this, "文件夹创建失败", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -111,7 +121,7 @@ class MainActivity : AppCompatActivity() {
         val values = ContentValues()
         values.put(MediaStore.Images.ImageColumns.DISPLAY_NAME, displayName)
         values.put(MediaStore.Images.ImageColumns.MIME_TYPE, "image/jpeg")
-        values.put(MediaStore.Images.ImageColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/Mars")
+        values.put(MediaStore.Images.ImageColumns.RELATIVE_PATH, Environment.DIRECTORY_PICTURES + "/nba")
         imageUri = contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
 
         val outputStream = imageUri?.let {
@@ -131,7 +141,7 @@ class MainActivity : AppCompatActivity() {
     fun query(view: View) {
 
         val external = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-        val selection = MediaStore.Images.Media.DISPLAY_NAME+ "?="
+        val selection = MediaStore.Images.Media.DISPLAY_NAME+ "=?"
         val args = Array(1){"mars.jpg"}
         val projection = Array(1){MediaStore.Images.Media._ID}
         // 数据库查询
@@ -154,7 +164,10 @@ class MainActivity : AppCompatActivity() {
         imageUri?.let {
             // Android R中的所有的文件操作 都需要通过 uri 来操作
             // 查询到具体的 uri 再进行删除，修改
-            contentResolver.update(it, values, null, null)
+            val update = contentResolver.update(it, values, null, null)
+            if (update > 0) {
+                Toast.makeText(this, "update success", Toast.LENGTH_LONG).show()
+            }
         }
     }
 
@@ -164,9 +177,12 @@ class MainActivity : AppCompatActivity() {
      * */
     fun delete(view: View) {
         val external = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-        val selection = MediaStore.Images.Media.DISPLAY_NAME+ "?="
-        val args = Array(1){"mars.jpg"}
-        contentResolver.delete(external, selection, args)
+        val selection = MediaStore.Images.Media.DISPLAY_NAME+ "=?"
+        val args = Array(1){"mars_cout.jpg"}
+        val delete = contentResolver.delete(external, selection, args)
+        if (delete > 0) {
+            Toast.makeText(this, "delete success", Toast.LENGTH_LONG).show()
+        }
     }
 
     /**
@@ -226,14 +242,17 @@ class MainActivity : AppCompatActivity() {
         // 创建一个文件夹
         val baseRequest = FileRequest(File("Mars"))
         baseRequest.path = "Mars"
-        FileAccessFactory.getIFile(baseRequest).newCreateFile(this, baseRequest)
+        val response = FileAccessFactory.getIFile(baseRequest).newCreateFile(this, baseRequest)
+        if (response.isSuccess) {
+            Toast.makeText(this, "使用架构创建文件夹成功", Toast.LENGTH_LONG).show()
+        }
     }
 
     /**
      *  使用架构创建文件
      *
      * */
-    fun createFile() {
+    fun createFile(view: View) {
         val baseRequest = FileRequest(File("ExternalScopeTestApp/"))
         baseRequest.displayName = "test.txt"
         val fileResponse = FileAccessFactory.getIFile(baseRequest).newCreateFile(this, baseRequest)
@@ -243,6 +262,7 @@ class MainActivity : AppCompatActivity() {
             val bos = BufferedOutputStream(outputStream)
             bos.write(data.toByteArray())
             bos.close()
+            Toast.makeText(this, "数据写入成功： ${fileResponse.uri}", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -250,7 +270,7 @@ class MainActivity : AppCompatActivity() {
      *  使用架构创建图片
      *
      * */
-    fun createImage() {
+    fun createImage(view: View) {
         val imageRequest = ImageRequest(File("mars.jpg"))
         imageRequest.path = "Mars"
         imageRequest.displayName = "mars.jpg"
@@ -271,7 +291,7 @@ class MainActivity : AppCompatActivity() {
      *  使用架构查询图片
      *
      * */
-    fun queryImage() {
+    fun queryImage(view: View) {
         val baseRequest = ImageRequest(File("mars.jpg"))
         baseRequest.displayName = "mars.jpg"
         val response = FileAccessFactory.getIFile(baseRequest).query(this, baseRequest)
@@ -284,7 +304,7 @@ class MainActivity : AppCompatActivity() {
      *  使用架构删除图片
      *
      * */
-    fun deleteImage() {
+    fun deleteImage(view: View) {
         // 先查询出来，再执行删除操作
         val baseRequest = ImageRequest(File("mars.jpg"))
         baseRequest.displayName = "mars.jpg"
@@ -298,7 +318,7 @@ class MainActivity : AppCompatActivity() {
      *  使用架构更新图片
      *
      * */
-    fun updateImage() {
+    fun updateImage(view: View) {
         val where = ImageRequest(File("mars.jpg"))
         where.displayName = "mars.jpg"
 
@@ -311,7 +331,7 @@ class MainActivity : AppCompatActivity() {
     /**
      *  使用架构复制文件
      * */
-    fun copyImage() {
+    fun copyImage(view: View) {
         val copyRequest = CopyRequest(File("test.txt"))
         copyRequest.displayName = "test.txt"
         copyRequest.distFile = File("Mars/test.txt")

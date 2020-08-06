@@ -72,11 +72,71 @@
         android:id="@+id/create"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="创建文件"
+        android:text="使用架构创建文件夹"
         android:onClick="create"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/download" />
+
+    <Button
+        android:id="@+id/createFile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="使用架构创建文件"
+        android:onClick="createFile"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/create" />
+
+    <Button
+        android:id="@+id/createImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="使用架构创建图片"
+        android:onClick="createImage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/createFile" />
+
+    <Button
+        android:id="@+id/queryImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="使用架构查询图片"
+        android:onClick="queryImage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/createImage" />
+
+    <Button
+        android:id="@+id/deleteImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="使用架构删除图片"
+        android:onClick="deleteImage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/queryImage" />
+
+    <Button
+        android:id="@+id/updateImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="使用架构更新图片"
+        android:onClick="updateImage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/deleteImage" />
+
+    <Button
+        android:id="@+id/copyImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="使用架构复制文件"
+        android:onClick="copyImage"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/updateImage" />
 
 
 

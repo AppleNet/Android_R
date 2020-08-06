@@ -8,6 +8,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.example.llc.storage.sanbox.BaseRequest;
 import com.example.llc.storage.sanbox.FileAccessFactory;
@@ -185,8 +186,8 @@ public class MediaStoreAccessImpl implements IFile {
                 Method method = baseRequest.getClass().getMethod(methodName);
                 String value = (String) method.invoke(baseRequest);
                 if (!TextUtils.isEmpty(key) && !TextUtils.isEmpty(value)) {
+                    Log.d("VeloceHostImpl", "key: " + key + ", value: " + value);
                     contentValues.put(key, value);
-                    return contentValues;
                 }
             } catch (Exception e) {
                 e.printStackTrace();
@@ -217,7 +218,7 @@ public class MediaStoreAccessImpl implements IFile {
                 return;
             }
             StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(" where 1 = 1"); // 防止前面拼错，where 也可以省略
+            stringBuilder.append("1 = 1"); // 防止前面拼错，where 也可以省略
             Iterator<Map.Entry<String, Object>> iterator = contentValues.valueSet().iterator();
             ArrayList<String> arrayList = new ArrayList<>();
             while (iterator.hasNext()) {
