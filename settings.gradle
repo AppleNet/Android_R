@@ -1,2 +1,2 @@
-include ':app', ':storage'
+include ':app', ':storage', ':screen'
 rootProject.name='Android_R'

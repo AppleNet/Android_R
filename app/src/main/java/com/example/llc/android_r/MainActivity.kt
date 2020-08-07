@@ -19,6 +19,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import com.example.llc.screen.NotchManager
+import com.example.llc.screen.OnNotchCallBack
 import com.example.llc.storage.sanbox.FileAccessFactory
 import com.example.llc.storage.sanbox.coy.CopyRequest
 import com.example.llc.storage.sanbox.file.FileRequest
@@ -32,7 +34,7 @@ import java.net.HttpURLConnection
 import java.net.URL
 import kotlin.concurrent.thread
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnNotchCallBack {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +47,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         checkPermission(this)
+        NotchManager.getInstance().setOnNotchListener(window, this)
     }
 
 
@@ -58,6 +61,16 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onNotchPortraitCallback(margin: Int) {
+        // TODO 设置控件的 margin -> topMargin  = margin
+
+    }
+
+    override fun onNotchLandscapeCallback(margin: Int) {
+        // TODO 判断水平方向是 270 度 还是 90
+        // TODO leftMargin or rightMargin
     }
 
 
