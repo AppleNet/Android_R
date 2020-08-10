@@ -1,5 +1,6 @@
 package com.example.llc.storage.sanbox.image;
 
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 
@@ -40,7 +41,13 @@ public class ImageRequest extends BaseRequest {
     }
 
     public String getPath() {
-        return Environment.DIRECTORY_PICTURES + "/" + path;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (!Environment.isExternalStorageLegacy()) {
+                // 不是兼容模式
+                return Environment.DIRECTORY_PICTURES + "/" + path;
+            }
+        }
+        return Environment.getExternalStorageDirectory() + "/" + path;
     }
 
     public void setPath(String path) {

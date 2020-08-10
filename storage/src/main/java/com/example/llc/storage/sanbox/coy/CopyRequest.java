@@ -1,5 +1,7 @@
 package com.example.llc.storage.sanbox.coy;
 
+import android.os.Build;
+import android.os.Environment;
 import android.provider.MediaStore;
 
 import com.example.llc.storage.sanbox.BaseRequest;
@@ -42,7 +44,13 @@ public class CopyRequest extends BaseRequest {
     }
 
     public String getPath() {
-        return path;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (!Environment.isExternalStorageLegacy()) {
+                // 不是兼容模式
+                return Environment.DIRECTORY_DOWNLOADS + "/" + path;
+            }
+        }
+        return Environment.getExternalStorageDirectory() + "/" + path;
     }
 
     public void setPath(String path) {
