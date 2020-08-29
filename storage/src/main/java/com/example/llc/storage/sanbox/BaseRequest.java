@@ -8,6 +8,8 @@ public class BaseRequest {
     private File file;
     // type 文件类型
     private String type;
+    // 文件路径
+    private String parentPath;
 
     public BaseRequest(File file) {
         this.file = file;
@@ -27,5 +29,13 @@ public class BaseRequest {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getParentPath() {
+        return parentPath;
+    }
+
+    public void setParentPath(String parentPath) {
+        this.parentPath = parentPath;
     }
 }

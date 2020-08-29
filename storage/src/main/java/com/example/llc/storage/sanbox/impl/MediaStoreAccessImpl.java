@@ -126,8 +126,8 @@ public class MediaStoreAccessImpl implements IFile {
             delete(context, fileRequest);
             // 创建目的文件
             Uri destUri = newCreateFile(context, fileRequest).getUri();
-            OutputStream outputStream = null;
-            InputStream inputStream = null;
+            OutputStream outputStream;
+            InputStream inputStream;
             try {
                 outputStream = context.getContentResolver().openOutputStream(destUri);
                 inputStream = context.getContentResolver().openInputStream(destUri);

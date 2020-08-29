@@ -22,7 +22,13 @@ public class FileRequest extends BaseRequest {
 
     public FileRequest(File file) {
         super(file);
-        this.path = file.getName();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (!Environment.isExternalStorageLegacy()) {
+                this.path = file.getName();
+            }
+        } else {
+            setParentPath(Environment.getExternalStorageDirectory() + "/" + displayName);
+        }
     }
 
     public String getDisplayName() {
@@ -44,7 +50,13 @@ public class FileRequest extends BaseRequest {
     }
 
     public void setPath(String path) {
-        this.path = path;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (!Environment.isExternalStorageLegacy()) {
+                this.path = path;
+            }
+        } else {
+            setParentPath(Environment.getExternalStorageDirectory() + "/" + displayName);
+        }
     }
 
     public String getTitle() {

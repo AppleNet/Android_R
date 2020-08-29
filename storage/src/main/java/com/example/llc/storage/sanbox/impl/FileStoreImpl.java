@@ -7,16 +7,19 @@ import android.text.TextUtils;
 import com.example.llc.storage.sanbox.BaseRequest;
 import com.example.llc.storage.sanbox.FileResponse;
 import com.example.llc.storage.sanbox.IFile;
-import com.example.llc.storage.sanbox.annotation.DbFiled;
+import com.example.llc.storage.sanbox.common.CommonRequest;
+import com.example.llc.storage.sanbox.coy.CopyRequest;
 import com.example.llc.storage.sanbox.file.FileRequest;
+import com.example.llc.storage.sanbox.image.ImageRequest;
 
-import org.w3c.dom.Text;
-
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.HashMap;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.IdentityHashMap;
 
 public class FileStoreImpl implements IFile {
 
@@ -39,20 +42,33 @@ public class FileStoreImpl implements IFile {
     @Override
     public <T extends BaseRequest> FileResponse newCreateFile(Context context, T baseRequest) {
         //
-        if (baseRequest instanceof FileRequest) {
-            FileRequest fileRequest = (FileRequest) baseRequest;
+        if (baseRequest instanceof CommonRequest) {
+            CommonRequest fileRequest = (CommonRequest) baseRequest;
             boolean flag = false;
             File file;
             if (TextUtils.isEmpty(fileRequest.getDisplayName())) {
+                // 创建文件夹
                 file = new File(fileRequest.getPath());
-                if (!file.exists() && file.isDirectory()) {
+                if (file.exists()) {
+                    flag = file.delete();
+                }
+                if (!file.exists() && !file.isDirectory()) {
                     flag = file.mkdirs();
                 }
             } else {
-                file = new File(fileRequest.getPath() + "/" + fileRequest.getDisplayName());
+                // 创建文件
+                file = new File(fileRequest.getPath() + fileRequest.getDisplayName());
+                if (file.exists()) {
+                    flag = file.delete();
+                }
                 if (!file.exists() && !file.isDirectory()) {
                     try {
-                        flag = file.createNewFile();
+                        file = new File(fileRequest.getPath());
+                        flag = file.mkdirs();
+                        if (flag) {
+                            file = new File(fileRequest.getPath() + fileRequest.getDisplayName());
+                            flag = file.createNewFile();
+                        }
                     } catch (IOException e) {
                         //
                     }
@@ -60,27 +76,92 @@ public class FileStoreImpl implements IFile {
             }
             return new FileResponse(flag, Uri.parse(file.getAbsolutePath()), file);
         }
-        return null;
+        return new FileResponse(false, null, null);
     }
 
+    /**
+     *  删除文件
+     *
+     * @param context context
+     * @param baseRequest baseRequest
+     * */
     @Override
     public <T extends BaseRequest> FileResponse delete(Context context, T baseRequest) {
-        return null;
+        if (baseRequest instanceof CommonRequest) {
+            CommonRequest fileRequest = (CommonRequest) baseRequest;
+            boolean flag = false;
+            File file;
+            if (!TextUtils.isEmpty(fileRequest.getDisplayName())) {
+                file = new File(fileRequest.getPath() + fileRequest.getDisplayName());
+                if (file.exists() || file.isDirectory()) {
+                    flag = file.delete();
+                }
+            } else {
+                file = new File(fileRequest.getPath());
+            }
+            return new FileResponse(flag, Uri.parse(file.getAbsolutePath()), file);
+        }
+        return new FileResponse(false, null, null);
     }
 
     @Override
     public <T extends BaseRequest> FileResponse renameTo(Context context, T baseRequest, T subBaseRequest) {
+
         return null;
     }
 
+    /**
+     *  复制文件
+     *
+     * */
     @Override
     public <T extends BaseRequest> FileResponse copyFile(Context context, T baseRequest) {
+        if (baseRequest instanceof CopyRequest) {
+            CopyRequest copyRequest = (CopyRequest) baseRequest;
+            FileResponse fileResponse = query(context, baseRequest);
+            if (!fileResponse.isSuccess()) {
+                // 源文件不存在
+                 return new FileResponse(false, null, null);
+            }
+            //
+            FileRequest fileRequest = new FileRequest(copyRequest.getDistFile().getParentFile());
+            fileRequest.setDisplayName(copyRequest.getDistFile().getName());
+            fileResponse = query(context, fileRequest);
+            if (fileResponse.isSuccess()) {
+                delete(context, fileRequest);
+            } else {
+                Uri destUri = newCreateFile(context, fileRequest).getUri();
+                if (fileResponse.isSuccess()) {
+                    OutputStream outputStream;
+                    InputStream inputStream;
+                    try {
+                        outputStream = context.getContentResolver().openOutputStream(destUri);
+                        inputStream = context.getContentResolver().openInputStream(destUri);
+                        BufferedOutputStream fileOutputStream = new BufferedOutputStream(outputStream);
+                        BufferedInputStream fileInputStream = new BufferedInputStream(inputStream);
+                        byte[] buff = new byte[1024];
+                        while (fileInputStream.read(buff) != -1) {
+                            fileOutputStream.write(buff);
+                        }
+                        fileInputStream.close();
+                        fileOutputStream.close();
+                    } catch (Exception e) {
+                        //
+                    }
+                }
+            }
+        }
         return null;
     }
 
     @Override
     public <T extends BaseRequest> FileResponse query(Context context, T baseRequest) {
-        return null;
+        String path = baseRequest.getParentPath();
+        File file = new File(path);
+        if (file.exists()) {
+            return new FileResponse(true, Uri.parse(path), file);
+        }
+        return new FileResponse(false, null, null);
     }
 
 }

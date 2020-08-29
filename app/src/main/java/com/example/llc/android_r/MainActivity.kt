@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentUris
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -27,6 +28,7 @@ import com.example.llc.storage.sanbox.file.FileRequest
 import com.example.llc.storage.sanbox.image.ImageRequest
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.content_main.*
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
 import java.io.File
@@ -48,8 +50,21 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
 
         checkPermission(this)
         NotchManager.getInstance().setOnNotchListener(window, this)
-    }
 
+        // Method -----> ArtMethod
+        val wrong = Class.forName("com.example.llc.android_r.Test")
+            .getDeclaredMethod("test", Context::class.java)
+
+        val right = Class.forName("com.example.llc.android_r.web.Test")
+            .getDeclaredMethod("test", Context::class.java)
+
+
+
+        toastBtn.setOnClickListener {
+            val test = Test()
+            test.test(this)
+        }
+    }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
