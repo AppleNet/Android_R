@@ -10,16 +10,13 @@ import com.example.llc.storage.sanbox.IFile;
 import com.example.llc.storage.sanbox.common.CommonRequest;
 import com.example.llc.storage.sanbox.coy.CopyRequest;
 import com.example.llc.storage.sanbox.file.FileRequest;
-import com.example.llc.storage.sanbox.image.ImageRequest;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.util.IdentityHashMap;
 
 public class FileStoreImpl implements IFile {
 

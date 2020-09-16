@@ -57,7 +57,11 @@ public class ImageRequest extends BaseRequest {
     }
 
     public void setPath(String path) {
-        this.path = path;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (!Environment.isExternalStorageLegacy()) {
+                this.path = path;
+            }
+        }
         setParentPath(Environment.getExternalStorageDirectory() + "/" + displayName);
     }
 }
