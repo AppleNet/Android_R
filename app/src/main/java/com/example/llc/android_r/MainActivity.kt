@@ -5,7 +5,6 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentUris
 import android.content.ContentValues
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -29,7 +28,6 @@ import com.example.llc.storage.sanbox.file.FileRequest
 import com.example.llc.storage.sanbox.image.ImageRequest
 
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
 import java.io.File
@@ -53,17 +51,6 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
         NotchManager.getInstance().setOnNotchListener(window, this)
         StudentDb.getDataBase(this)
 
-        // Method -----> ArtMethod
-        val wrong = Class.forName("com.example.llc.android_r.Test")
-            .getDeclaredMethod("test", Context::class.java)
-
-        val right = Class.forName("com.example.llc.android_r.web.Test")
-            .getDeclaredMethod("test", Context::class.java)
-
-        toastBtn.setOnClickListener {
-            val test = Test()
-            test.test(this)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -90,25 +77,34 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
 
 
     private fun checkPermission(activity: Activity): Boolean {
-        if (activity.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+        if (activity.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED ||
+            activity.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             activity.requestPermissions(
                 Array(2) { Manifest.permission.WRITE_EXTERNAL_STORAGE; Manifest.permission.READ_EXTERNAL_STORAGE },
                 1
             )
+        } else {
+            createFile()
         }
         return false
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        // 在 11 上创建一个文件 这样是不能成功的，已经不支持这样操作
-//        val file = File(Environment.getExternalStorageDirectory(), "mars.txt")
-//        file.createNewFile()
-        //
+        when(requestCode) {
+            1 ->{
+                if(grantResults.isNotEmpty() && grantResults[0]  == PackageManager.PERMISSION_GRANTED) {
+                    createFile()
+                } else {
+                    Toast.makeText(this, "You denied STORAGE permission", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    private fun createFile() {
+        val file = File(Environment.getExternalStorageDirectory(), "mars.txt")
+        file.createNewFile()
     }
 
     /**
@@ -129,14 +125,14 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
 
         if (result == null) {
             // 失败
-            Toast.makeText(this, "文件夹创建成功", Toast.LENGTH_LONG).show()
+            Toast.makeText(view.context, "文件夹创建成功", Toast.LENGTH_LONG).show()
         } else {
             // 成功
-            Toast.makeText(this, "文件夹创建失败", Toast.LENGTH_LONG).show()
+            Toast.makeText(view.context, "文件夹创建失败", Toast.LENGTH_LONG).show()
         }
     }
 
-    var imageUri: Uri? = null
+    private var imageUri: Uri? = null
 
     /**
      *  在 Android R 中创建图片(文件)
@@ -159,7 +155,7 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
         outputStream?.close()
         //
-        Toast.makeText(this, "insert success!", Toast.LENGTH_LONG).show()
+        Toast.makeText(view.context, "insert success!", Toast.LENGTH_LONG).show()
     }
 
     /**
@@ -177,7 +173,7 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
         if(cursor != null && cursor.moveToFirst()) {
             // Android R 提供的 API 将得到的 id 转换成对应的 uri
             val queryUri = ContentUris.withAppendedId(external, cursor.getLong(0))
-            Toast.makeText(this, "query success! $queryUri", Toast.LENGTH_LONG).show()
+            Toast.makeText(view.context, "query success! $queryUri", Toast.LENGTH_LONG).show()
             cursor.close()
         }
     }
@@ -194,7 +190,7 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
             // 查询到具体的 uri 再进行删除，修改
             val update = contentResolver.update(it, values, null, null)
             if (update > 0) {
-                Toast.makeText(this, "update success", Toast.LENGTH_LONG).show()
+                Toast.makeText(view.context, "update success", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -209,7 +205,7 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
         val args = Array(1){"mars_cout.jpg"}
         val delete = contentResolver.delete(external, selection, args)
         if (delete > 0) {
-            Toast.makeText(this, "delete success", Toast.LENGTH_LONG).show()
+            Toast.makeText(view.context, "delete success", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -257,6 +253,7 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
                 intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 intent.setDataAndType(insertUri, "application/vnd.android.package-archive")
                 startActivity(intent)
+                Toast.makeText(view.context, "FLAG_GRANT_READ_URI_PERMISSION", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -272,7 +269,7 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
         baseRequest.path = "Mars"
         val response = FileAccessFactory.getIFile(baseRequest).newCreateFile(this, baseRequest)
         if (response.isSuccess) {
-            Toast.makeText(this, "使用架构创建文件夹成功", Toast.LENGTH_LONG).show()
+            Toast.makeText(view.context, "使用架构创建文件夹成功", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -290,7 +287,7 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
             val bos = BufferedOutputStream(outputStream)
             bos.write(data.toByteArray())
             bos.close()
-            Toast.makeText(this, "数据写入成功： ${fileResponse.uri}", Toast.LENGTH_LONG).show()
+            Toast.makeText(view.context, "数据写入成功： ${fileResponse.uri}", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -311,7 +308,7 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
             val bitmap = BitmapFactory.decodeResource(resources, R.mipmap.comment_like_24_24)
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, outputStream)
             outputStream?.close()
-            Toast.makeText(this, "insert success!", Toast.LENGTH_LONG).show()
+            Toast.makeText(view.context, "insert success!", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -324,7 +321,7 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
         baseRequest.displayName = "mars.jpg"
         val response = FileAccessFactory.getIFile(baseRequest).query(this, baseRequest)
         if(response.isSuccess) {
-            Toast.makeText(this, "查询成功：" + response.uri, Toast.LENGTH_LONG).show()
+            Toast.makeText(view.context, "查询成功：" + response.uri, Toast.LENGTH_LONG).show()
         }
     }
 
@@ -338,7 +335,7 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
         baseRequest.displayName = "mars.jpg"
         val response = FileAccessFactory.getIFile(baseRequest).delete(this, baseRequest)
         if(response.isSuccess) {
-            Toast.makeText(this, "删除成功", Toast.LENGTH_LONG).show()
+            Toast.makeText(view.context, "删除成功", Toast.LENGTH_LONG).show()
         }
     }
 
@@ -353,7 +350,12 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
         val item = ImageRequest(File("mars_cout.jpg"))
         item.displayName = "mars_cout.jpg"
 
-        FileAccessFactory.getIFile(where).renameTo(this, where, item)
+        val fileResponse = FileAccessFactory.getIFile(where).renameTo(this, where, item)
+        if (fileResponse.isSuccess) {
+            Toast.makeText(view.context, "重命名成功", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(view.context, "重命名失败", Toast.LENGTH_LONG).show()
+        }
     }
 
     /**
@@ -363,7 +365,12 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
         val copyRequest = CopyRequest(File("test.txt"))
         copyRequest.displayName = "test.txt"
         copyRequest.distFile = File("Mars/test.txt")
-        FileAccessFactory.getIFile(copyRequest).copyFile(this, copyRequest)
+        val fileResponse = FileAccessFactory.getIFile(copyRequest).copyFile(this, copyRequest)
+        if (fileResponse.isSuccess) {
+            Toast.makeText(view.context, "复制成功", Toast.LENGTH_LONG).show()
+        } else {
+            Toast.makeText(view.context, "复制失败", Toast.LENGTH_LONG).show()
+        }
     }
 
 }

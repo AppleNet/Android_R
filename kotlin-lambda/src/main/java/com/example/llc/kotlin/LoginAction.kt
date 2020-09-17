@@ -9,6 +9,11 @@ fun main(){
             println("login fail")
         }
     }
+
+    val r = loginTest {
+        true
+    }
+    println("r $r")
 }
 
 private fun login(userName: String, userPwd: String, response: (Boolean)-> Unit) {
@@ -24,4 +29,10 @@ private fun loginEngine(userName: String, userPwd: String, response: (Boolean)->
         // TODO
         response(false)
     }
+}
+
+private fun loginTest(test:() -> Boolean): Int {
+    val result = test()
+    println("result: $result")
+    return 1
 }

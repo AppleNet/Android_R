@@ -102,7 +102,7 @@ public class FileStoreImpl implements IFile {
     }
 
     @Override
-    public <T extends BaseRequest> FileResponse renameTo(Context context, T baseRequest, T subBaseRequest) {
+    public <T extends BaseRequest> FileResponse renameTo(Context context, T where, T request) {
 
         return null;
     }
