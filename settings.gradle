@@ -1,2 +1,2 @@
-include ':app', ':storage', ':screen', ':database'
+include ':app', ':storage', ':screen', ':database', ':kotlin-lambda'
 rootProject.name='Android_R'

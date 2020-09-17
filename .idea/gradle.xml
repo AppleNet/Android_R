@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/database" />
+            <option value="$PROJECT_DIR$/kotlin-lambda" />
             <option value="$PROJECT_DIR$/screen" />
             <option value="$PROJECT_DIR$/storage" />
           </set>

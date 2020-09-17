@@ -20,6 +20,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import com.example.llc.database.db.StudentDb
 import com.example.llc.screen.NotchManager
 import com.example.llc.screen.OnNotchCallBack
 import com.example.llc.storage.sanbox.FileAccessFactory
@@ -50,6 +51,7 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
 
         checkPermission(this)
         NotchManager.getInstance().setOnNotchListener(window, this)
+        StudentDb.getDataBase(this)
 
         // Method -----> ArtMethod
         val wrong = Class.forName("com.example.llc.android_r.Test")
@@ -57,8 +59,6 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
 
         val right = Class.forName("com.example.llc.android_r.web.Test")
             .getDeclaredMethod("test", Context::class.java)
-
-
 
         toastBtn.setOnClickListener {
             val test = Test()
