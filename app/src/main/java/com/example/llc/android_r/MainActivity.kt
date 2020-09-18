@@ -3,6 +3,7 @@ package com.example.llc.android_r
 import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.ContentUris
 import android.content.ContentValues
 import android.content.Intent
@@ -28,6 +29,7 @@ import com.example.llc.storage.sanbox.file.FileRequest
 import com.example.llc.storage.sanbox.image.ImageRequest
 
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.*
 import java.io.BufferedInputStream
 import java.io.BufferedOutputStream
 import java.io.File
@@ -371,6 +373,44 @@ class MainActivity : AppCompatActivity(), OnNotchCallBack {
         } else {
             Toast.makeText(view.context, "复制失败", Toast.LENGTH_LONG).show()
         }
+    }
+
+    suspend fun go() {
+
+        // 通过 GlobalScope「非阻塞式」 声明一个协程「默认开始在 UI 线程」
+        val job = GlobalScope.launch(Dispatchers.Main) {
+            // 这样声明默认也是在 UI 线程
+
+            val pro = ProgressDialog(this@MainActivity)
+            pro.setMessage("正在注册中....")
+            pro.show()
+
+            withContext(Dispatchers.IO) {
+                println("1. 注册耗时操作：${Thread.currentThread().name}")
+                Thread.sleep(2000)
+            }
+
+            println("2.注册耗时操作完成，更新注册 UI：${Thread.currentThread().name}")
+            pro.setMessage("注册成功，正在去登录...")
+
+            withContext(Dispatchers.IO) {
+                println("3. 登录耗时操作：${Thread.currentThread().name}")
+                Thread.sleep(2000)
+            }
+
+            println("4.注册耗时操作完成，更新注册 UI：${Thread.currentThread().name}")
+            pro.setMessage("登录成功")
+
+            Thread.sleep(1000)
+            pro.dismiss()
+        }
+
+        // 一点点的时间差，不是非常
+        job.cancel()
+
+        // 一点点的时间差都不允许
+        job.cancelAndJoin()
+
     }
 
 }
