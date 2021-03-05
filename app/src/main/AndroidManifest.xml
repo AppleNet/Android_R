@@ -26,6 +26,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ScopeStorageActivity"/>
+        <activity android:name=".ScreenActivity"/>
+        <activity android:name=".RoomDbActivity"/>
+        <activity android:name=".StorageAccessFrameworkActivity"/>
     </application>
 
 </manifest>

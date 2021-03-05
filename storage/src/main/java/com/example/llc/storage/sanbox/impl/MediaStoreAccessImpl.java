@@ -29,6 +29,15 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+/**
+ * com.example.llc.storage.sanbox.impl.MediaStoreAccessImpl
+ * @author liulongchao
+ * @since 2021-03-04
+ *
+ * 可共享的MediaStore Api 来进行文件的存储访问
+ *   在 Android 10（API 级别 29）或更高版本中，访问其他应用的文件需要 READ_EXTERNAL_STORAGE 或 WRITE_EXTERNAL_STORAGE 权限
+ *   在 Android 9（API 级别 28）或更低版本中，访问所有文件均需要相关权限
+ */
 public class MediaStoreAccessImpl implements IFile {
 
     // uri
@@ -38,7 +47,7 @@ public class MediaStoreAccessImpl implements IFile {
     public static final String DOWNLOADS = "Downloads"; // 什么都能放
 
     // 外置卡的 uri 放到 hashMap 中
-    private HashMap<String, Uri> uriMap = new HashMap<>();
+    private final HashMap<String, Uri> uriMap = new HashMap<>();
 
     /**
      * 构造方法，将类型存入 uriMap 中

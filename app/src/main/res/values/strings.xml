@@ -1,4 +1,27 @@
 <resources>
     <string name="app_name">Android_R</string>
     <string name="action_settings">Settings</string>
+    <string name="scope_storage">分区存储</string>
+    <string name="saf_scope_file_list">使用分区存储框架打开文件选择页面</string>
+    <string name="saf_scope_create_file">使用分区存储框架创建文件</string>
+    <string name="saf_scope_alert_file">使用分区存储框架修改文件</string>
+    <string name="saf_scope_delete_file">使用分区存储框架删除文件</string>
+    <string name="screen_adapter">屏幕适配</string>
+    <string name="room_module">Room组件</string>
+    <string name="kotlin_lambda">协程</string>
+    <string name="saf">分区存储框架</string>
+    <string name="crateSAF">创建普通文件夹</string>
+    <string name="insertImage">SD卡插入图片</string>
+    <string name="queryImg">查询图片</string>
+    <string name="updateImg">修改图片</string>
+    <string name="deleteImg">删除图片</string>
+    <string name="downloadImg">下载图片</string>
+    <string name="createDir">使用架构创建文件夹</string>
+    <string name="createFile">使用架构创建文件</string>
+    <string name="createImg">使用架构创建图片</string>
+    <string name="queryImgSAF">使用架构查询图片</string>
+    <string name="deleteImgSAF">使用架构删除图片</string>
+    <string name="updateImgSAF">使用架构更新图片</string>
+    <string name="copyImage">使用架构复制文件</string>
+    <string name="toast">toast</string>
 </resources>
