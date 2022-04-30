@@ -13,6 +13,7 @@ import com.example.llc.android_r.scope.ScopeStorageArchitectureActivity
 import com.example.llc.android_r.scope.StorageAccessFrameworkActivity
 import com.example.llc.android_r.screen.ScreenActivity
 import com.example.llc.android_r.webview.WebViewActivity
+import com.example.llc.android_r.webview.WebViewActivity1
 
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.content_main.*
@@ -55,7 +56,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         file.setOnClickListener {
-            startActivity(Intent(this, FileArchitectureActivity::class.java))
+            startActivity(Intent(this, WebViewActivity1::class.java))
         }
 
         webview.setOnClickListener {

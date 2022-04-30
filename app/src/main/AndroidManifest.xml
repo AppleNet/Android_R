@@ -38,6 +38,7 @@
         <activity android:name=".scope.ScopeStorageArchitectureActivity"/>
         <activity android:name=".scope.FileArchitectureActivity"/>
         <activity android:name=".webview.WebViewActivity"/>
+        <activity android:name=".webview.WebViewActivity1"/>
     </application>
 
 </manifest>

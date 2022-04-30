@@ -1,22 +1,17 @@
 package com.example.llc.android_r.webview;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.util.Log;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.base.utils.NestedScrollWebView;
 import com.example.llc.android_r.R;
 
 /**
@@ -25,7 +20,7 @@ import com.example.llc.android_r.R;
  * @author liulongchao
  * @since 2022/4/22
  */
-public class WebViewActivity extends AppCompatActivity {
+public class WebViewActivity1 extends AppCompatActivity {
 
     private boolean showFeatures = false;
 
@@ -34,7 +29,7 @@ public class WebViewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_webview_coordinator_layout);
+        setContentView(R.layout.activity_webview_coordinator_layout1);
         final ImageView imageView = findViewById(R.id.imageView);
         WebView webView = findViewById(R.id.webview);
         WebSettings settings = webView.getSettings();
