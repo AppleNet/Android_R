@@ -230,6 +230,7 @@ public class NestedScrollWebView extends WebView implements NestedScrollingChild
                     ViewCompat.postInvalidateOnAnimation(this);
                 }
                 endDrag();
+                break;
             case MotionEvent.ACTION_MOVE:
                 Log.d(TAG, "MotionEvent.ACTION_MOVE... ");
                 final int y = (int) event.getRawY();
@@ -314,7 +315,7 @@ public class NestedScrollWebView extends WebView implements NestedScrollingChild
 
         final int top = -maxOverScrollY;
         final int bottom = maxOverScrollY + scrollRangeY;
-        Log.d(TAG, "newScrollY: " + newScrollY + ", top: " + top + ", bottom: " + bottom + ", bottom px2dp: " + pix2dip(getContext(), bottom));
+        Log.d(TAG, "newScrollY: " + newScrollY + ", top: " + top + ", bottom: " + bottom);
 
         boolean clampedY = false;
         if (newScrollY > bottom) {
@@ -412,16 +413,4 @@ public class NestedScrollWebView extends WebView implements NestedScrollingChild
         recycleVelocityTracker();
         stopNestedScroll(ViewCompat.TYPE_TOUCH);
     }
-
-
-    public int dip2pix(Context context, int dips) {
-        int densityDpi = context.getResources().getDisplayMetrics().densityDpi;
-        return dips * densityDpi / 160;
-    }
-
-    public int pix2dip(Context context, int pixs) {
-        int densityDpi = context.getResources().getDisplayMetrics().densityDpi;
-        return pixs * 160 / densityDpi;
-    }
-
 }

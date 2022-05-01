@@ -34,4 +34,5 @@ dependencies {
     implementation project(path: ':database')
     implementation project(path: ':kotlin-lambda')
     implementation project(path: ':base')
+    implementation project(path: ':webview')
 }

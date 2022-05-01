@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/materialdesign" />
             <option value="$PROJECT_DIR$/screen" />
             <option value="$PROJECT_DIR$/storage" />
+            <option value="$PROJECT_DIR$/webview" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
