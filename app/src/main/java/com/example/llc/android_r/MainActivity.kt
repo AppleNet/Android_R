@@ -56,11 +56,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         file.setOnClickListener {
-            startActivity(Intent(this, WebViewActivity1::class.java))
+            startActivity(Intent(this, FileArchitectureActivity::class.java))
         }
 
         webview.setOnClickListener {
             startActivity(Intent(this, WebViewActivity::class.java))
+        }
+
+        webview1.setOnClickListener {
+            startActivity(Intent(this, WebViewActivity1::class.java))
         }
     }
 
