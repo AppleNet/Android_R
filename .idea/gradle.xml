@@ -17,6 +17,7 @@
             <option value="$PROJECT_DIR$/kotlin-lambda" />
             <option value="$PROJECT_DIR$/materialdesign" />
             <option value="$PROJECT_DIR$/screen" />
+            <option value="$PROJECT_DIR$/startup" />
             <option value="$PROJECT_DIR$/storage" />
             <option value="$PROJECT_DIR$/webview" />
           </set>
