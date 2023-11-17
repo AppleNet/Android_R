@@ -79,7 +79,7 @@ public class TopologySort {
             //
             if (startupChildrenMap.containsKey(cls)) {
                 List<Class<? extends Startup>> childStartup = startupChildrenMap.get(cls);
-                for (Class<? extends Startup<?>> childCls : childStartup) {
+                for (Class<? extends Startup> childCls : childStartup) {
                     Integer integer = inDegreeMap.get(childCls);
                     inDegreeMap.put(cls, integer - 1);
                     if (integer - 1 == 0) {

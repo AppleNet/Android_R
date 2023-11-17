@@ -29,21 +29,21 @@ public class CoordinatorActivity extends AppCompatActivity {
         binding = ActivityCoordinatorBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        setSupportActionBar(binding.toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
-
-        binding.collapsingToolbarLayout.setTitle("蜡笔小新的梦想");
-
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        binding.recyclerView.setLayoutManager(layoutManager);
-        binding.recyclerView.setAdapter(new AuthorRecyclerAdapter(AuthorInfo.createTestData()));
+//        setSupportActionBar(binding.toolbar);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//
+//        binding.toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                onBackPressed();
+//            }
+//        });
+//
+//        binding.collapsingToolbarLayout.setTitle("蜡笔小新的梦想");
+//
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+//        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        binding.recyclerView.setLayoutManager(layoutManager);
+//        binding.recyclerView.setAdapter(new AuthorRecyclerAdapter(AuthorInfo.createTestData()));
     }
 }

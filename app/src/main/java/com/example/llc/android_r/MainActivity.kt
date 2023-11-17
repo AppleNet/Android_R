@@ -36,7 +36,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         storage.setOnClickListener {
-            startActivity(Intent(this, ScopeStorageActivity::class.java))
+            // startActivity(Intent(this, ScopeStorageActivity::class.java))
+
         }
 
         screen.setOnClickListener {

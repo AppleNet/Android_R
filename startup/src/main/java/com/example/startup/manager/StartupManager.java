@@ -107,7 +107,7 @@ public class StartupManager {
         }
 
         public Builder addAllStartup(List<Startup<?>> startups) {
-            startupList.addAll((Collection<? extends AndroidStartup<?>>) startups);
+            // startupList.addAll((Collection<? extends AndroidStartup<?>>) startups);
             return this;
         }
 
