@@ -6,9 +6,9 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.example.llc.android_r.flowlayout.FlowLayoutActivity
 import com.example.llc.android_r.room.RoomDbActivity
 import com.example.llc.android_r.scope.FileArchitectureActivity
-import com.example.llc.android_r.scope.ScopeStorageActivity
 import com.example.llc.android_r.scope.ScopeStorageArchitectureActivity
 import com.example.llc.android_r.scope.StorageAccessFrameworkActivity
 import com.example.llc.android_r.screen.ScreenActivity
@@ -29,7 +29,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
@@ -66,6 +65,9 @@ class MainActivity : AppCompatActivity() {
 
         webview1.setOnClickListener {
             startActivity(Intent(this, WebViewActivity1::class.java))
+        }
+        flowLayout.setOnClickListener {
+            startActivity(Intent(this, FlowLayoutActivity::class.java))
         }
     }
 

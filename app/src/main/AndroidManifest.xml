@@ -39,6 +39,7 @@
         <activity android:name=".scope.FileArchitectureActivity"/>
         <activity android:name=".webview.WebViewActivity"/>
         <activity android:name=".webview.WebViewActivity1"/>
+        <activity android:name=".flowlayout.FlowLayoutActivity"/>
     </application>
 
 </manifest>
