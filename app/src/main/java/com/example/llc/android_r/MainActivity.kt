@@ -12,6 +12,7 @@ import com.example.llc.android_r.scope.FileArchitectureActivity
 import com.example.llc.android_r.scope.ScopeStorageArchitectureActivity
 import com.example.llc.android_r.scope.StorageAccessFrameworkActivity
 import com.example.llc.android_r.screen.ScreenActivity
+import com.example.llc.android_r.skin.SkinActivity
 import com.example.llc.android_r.webview.WebViewActivity
 import com.example.llc.android_r.webview.WebViewActivity1
 
@@ -68,6 +69,9 @@ class MainActivity : AppCompatActivity() {
         }
         flowLayout.setOnClickListener {
             startActivity(Intent(this, FlowLayoutActivity::class.java))
+        }
+        skinActivity.setOnClickListener {
+            startActivity(Intent(this, SkinActivity::class.java))
         }
     }
 

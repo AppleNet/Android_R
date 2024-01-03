@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "com.example.llc.android_r"
         minSdkVersion 29
-        targetSdkVersion 30
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -35,4 +35,5 @@ dependencies {
     implementation project(path: ':kotlin-lambda')
     implementation project(path: ':base')
     implementation project(path: ':webview')
+    implementation project(path: ':skin')
 }

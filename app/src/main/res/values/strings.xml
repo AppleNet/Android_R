@@ -15,6 +15,7 @@
     <string name="webview">WebView滑动兼容</string>
     <string name="webview1">WebView滑动兼容1</string>
     <string name="flowLayout">FlowLayout</string>
+    <string name="SkinActivity">插件化换肤</string>
     <string name="crateSAF">创建普通文件夹</string>
     <string name="insertImage">SD卡插入图片</string>
     <string name="queryImg">查询图片</string>
