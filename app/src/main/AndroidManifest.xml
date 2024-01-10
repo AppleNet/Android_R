@@ -42,6 +42,7 @@
         <activity android:name=".flowlayout.FlowLayoutActivity"/>
         <activity android:name=".skin.SkinActivity"
             android:theme="@style/AppTheme_NoActionBar_Custom"/>
+        <activity android:name=".scroll.NestedScrollActivity"/>
     </application>
 
 </manifest>

@@ -23,7 +23,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         sApplication = this;
-        SkinManager.getInstance().init(this);
+        // SkinManager.getInstance().init(this);
     }
 
     public static Application getApplication() {

@@ -40,7 +40,7 @@ class SkinActivity : AppCompatActivity(){
         tabLayout.setupWithViewPager(viewPager)
 
         changSkin.setOnClickListener {
-            SkinManager.getInstance().loadSkin("/data/data/com.example.llc.android_r/skin/skin-debug.apk")
+            SkinManager.getInstance().loadSkin("/data/data/com.example.llc.android_r/skin/app-debug.apk")
         }
     }
 
