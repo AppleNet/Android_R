@@ -7,7 +7,7 @@ import android.os.Build;
 
 import androidx.annotation.NonNull;
 
-import com.example.skin.SkinManager;
+//import com.example.skin.SkinManager;
 
 /**
  * com.example.llc.android_r.MyApplication
@@ -32,14 +32,14 @@ public class MyApplication extends Application {
 
     @Override
     public Resources getResources() {
-        Resources skinResources = SkinManager.getInstance().getSkinResources();
-        if (skinResources != null) {
-            if (skinResources.getConfiguration() != getSuperResources().getConfiguration()
-                    || skinResources.getDisplayMetrics() != getSuperResources().getDisplayMetrics()) {
-                skinResources.updateConfiguration(getSuperResources().getConfiguration(), getSuperResources().getDisplayMetrics());
-            }
-            return skinResources;
-        }
+//        Resources skinResources = SkinManager.getInstance().getSkinResources();
+//        if (skinResources != null) {
+//            if (skinResources.getConfiguration() != getSuperResources().getConfiguration()
+//                    || skinResources.getDisplayMetrics() != getSuperResources().getDisplayMetrics()) {
+//                skinResources.updateConfiguration(getSuperResources().getConfiguration(), getSuperResources().getDisplayMetrics());
+//            }
+//            return skinResources;
+//        }
         return getSuperResources();
     }
 

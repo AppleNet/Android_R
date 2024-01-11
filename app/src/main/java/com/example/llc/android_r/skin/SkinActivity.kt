@@ -9,7 +9,7 @@ import com.example.llc.android_r.R
 import com.example.llc.android_r.skin.fragment.MusicFragment
 import com.example.llc.android_r.skin.fragment.RadioFragment
 import com.example.llc.android_r.skin.fragment.VideoFragment
-import com.example.skin.SkinManager
+//import com.example.skin.SkinManager
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_skin.changSkin
 
@@ -40,7 +40,7 @@ class SkinActivity : AppCompatActivity(){
         tabLayout.setupWithViewPager(viewPager)
 
         changSkin.setOnClickListener {
-            SkinManager.getInstance().loadSkin("/data/data/com.example.llc.android_r/skin/app-debug.apk")
+            //SkinManager.getInstance().loadSkin("/data/data/com.example.llc.android_r/skin/app-debug.apk")
         }
     }
 

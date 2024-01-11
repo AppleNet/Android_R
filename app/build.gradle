@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "com.example.llc.android_r"
         minSdkVersion 29
-        targetSdkVersion 27
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -21,9 +21,9 @@ android {
     }
 }
 
-configurations.configureEach {
-    resolutionStrategy.force 'androidx.core:core:1.3.2'
-}
+//configurations.configureEach {
+//    resolutionStrategy.force 'androidx.core:core:1.3.2'
+//}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -41,5 +41,5 @@ dependencies {
     implementation project(path: ':kotlin-lambda')
     implementation project(path: ':base')
     implementation project(path: ':webview')
-    implementation project(path: ':skin')
+    // implementation project(path: ':skin')
 }

@@ -4,8 +4,8 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import com.example.llc.android_r.R
-import com.example.skin.SkinCustomViewSupport
-import com.example.skin.SkinResources
+//import com.example.skin.SkinCustomViewSupport
+//import com.example.skin.SkinResources
 import com.google.android.material.tabs.TabLayout
 
 /**
@@ -14,7 +14,7 @@ import com.google.android.material.tabs.TabLayout
  * @author liulongchao
  * @since 2024/1/2
  */
-class MyTabLayout : TabLayout, SkinCustomViewSupport {
+class MyTabLayout : TabLayout/*, SkinCustomViewSupport*/ {
 
     var tabIndicatorColorResId = 0
     var tabTextColorResId = 0
@@ -31,18 +31,18 @@ class MyTabLayout : TabLayout, SkinCustomViewSupport {
         typeArrayed.recycle()
     }
 
-    override fun applySkin() {
-        if (tabIndicatorColorResId != 0) {
-            val tabIndicatorColor: Int =
-                SkinResources.getInstance().getColor(tabIndicatorColorResId)
-            setSelectedTabIndicatorColor(tabIndicatorColor)
-        }
-
-        if (tabTextColorResId != 0) {
-            val tabTextColor: ColorStateList =
-                SkinResources.getInstance().getColorStateList(tabTextColorResId)
-            tabTextColors = tabTextColor
-        }
-    }
+//    override fun applySkin() {
+//        if (tabIndicatorColorResId != 0) {
+//            val tabIndicatorColor: Int =
+//                SkinResources.getInstance().getColor(tabIndicatorColorResId)
+//            setSelectedTabIndicatorColor(tabIndicatorColor)
+//        }
+//
+//        if (tabTextColorResId != 0) {
+//            val tabTextColor: ColorStateList =
+//                SkinResources.getInstance().getColorStateList(tabTextColorResId)
+//            tabTextColors = tabTextColor
+//        }
+//    }
 
 }

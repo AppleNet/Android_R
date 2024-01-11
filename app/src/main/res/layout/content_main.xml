@@ -237,4 +237,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:background="@color/colorPrimary"/>
 
+    <TextView
+        android:id="@+id/textViewActivity"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line11"
+        android:text="@string/textViewActivity"
+        android:gravity="center"/>
+
+    <View
+        android:id="@+id/line12"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        app:layout_constraintTop_toBottomOf="@id/textViewActivity"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/colorPrimary"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
