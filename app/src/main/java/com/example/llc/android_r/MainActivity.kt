@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.llc.android_r.flowlayout.FlowLayoutActivity
 import com.example.llc.android_r.room.RoomDbActivity
+import com.example.llc.android_r.rv.RecyclerViewActivity
 import com.example.llc.android_r.scope.FileArchitectureActivity
 import com.example.llc.android_r.scope.ScopeStorageArchitectureActivity
 import com.example.llc.android_r.scope.StorageAccessFrameworkActivity
@@ -79,7 +80,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, NestedScrollActivity::class.java))
         }
         textViewActivity.setOnClickListener {
-            startActivity(Intent(this, TextViewActivity::class.java))
+            startActivity(Intent(this, RecyclerViewActivity::class.java))
         }
     }
 

@@ -45,6 +45,7 @@
         <activity android:name=".scroll.NestedScrollActivity"/>
         <activity android:name=".text.TextViewActivity"/>
         <activity android:name=".text.ViewPagerActivity"/>
+        <activity android:name=".rv.RecyclerViewActivity"/>
     </application>
 
 </manifest>
