@@ -16,6 +16,7 @@ import com.example.llc.android_r.screen.ScreenActivity
 import com.example.llc.android_r.scroll.NestedScrollActivity
 import com.example.llc.android_r.skin.SkinActivity
 import com.example.llc.android_r.text.TextViewActivity
+import com.example.llc.android_r.vp.ViewPagerActivity
 import com.example.llc.android_r.webview.WebViewActivity
 import com.example.llc.android_r.webview.WebViewActivity1
 
@@ -80,7 +81,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, NestedScrollActivity::class.java))
         }
         textViewActivity.setOnClickListener {
-            startActivity(Intent(this, RecyclerViewActivity::class.java))
+            startActivity(Intent(this, ViewPagerActivity::class.java))
         }
     }
 

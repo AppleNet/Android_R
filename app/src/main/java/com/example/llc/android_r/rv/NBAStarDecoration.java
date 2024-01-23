@@ -84,8 +84,9 @@ public class NBAStarDecoration extends RecyclerView.ItemDecoration {
                 // 文字绘制
                 String groupName = nbaStarAdapter.getGroupName(position);
                 textPaint.getTextBounds(groupName, 0 , groupName.length(), textRect);
+                Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
                 if (top + bottom - dp2px(50) / 2 - parent.getPaddingTop() >= 0) {
-                    canvas.drawText(groupName, left + 20, top + bottom - dp2px(50) / 2 + textRect.height() / 2, textPaint);
+                    canvas.drawText(groupName, left + 20, top + bottom - dp2px(50) / 2 + ((fontMetrics.descent - fontMetrics.ascent)/2) - fontMetrics.descent, textPaint);
                 }
             } else {
                 // 区域绘制
@@ -93,7 +94,8 @@ public class NBAStarDecoration extends RecyclerView.ItemDecoration {
                 // 文字绘制
                 String groupName = nbaStarAdapter.getGroupName(position);
                 textPaint.getTextBounds(groupName, 0 , groupName.length(), textRect);
-                canvas.drawText(groupName, left + 20, top + dp2px(50) / 2 + textRect.height() / 2 , textPaint);
+                Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
+                canvas.drawText(groupName, left + 20, top + dp2px(50) / 2 + ((fontMetrics.descent - fontMetrics.ascent)/2) - fontMetrics.descent , textPaint);
             }
         }
     }
