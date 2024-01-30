@@ -19,17 +19,18 @@ import kotlinx.android.synthetic.main.activity_nested_scroll.viewpager_view
 class NestedScrollActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_nested_scroll)
-        val viewPagerAdapter = ViewPagerAdapter(this, getFragments())
-        viewpager_view.adapter = viewPagerAdapter
-        val labels = arrayOf("linear", "scroll", "recycler")
-        val tabLayoutMediator = TabLayoutMediator(tablayout, viewpager_view) { tab, position -> tab.text = labels[position] }
-        tabLayoutMediator.attach()
-        swipe_refresh_layout.setOnRefreshListener {
-            swipe_refresh_layout.postDelayed({
-                swipe_refresh_layout.isRefreshing = false
-            }, 500)
-        }
+        setContentView(R.layout.activity_nested_scroll_custom)
+//        setContentView(R.layout.activity_nested_scroll)
+//        val viewPagerAdapter = ViewPagerAdapter(this, getFragments())
+//        viewpager_view.adapter = viewPagerAdapter
+//        val labels = arrayOf("linear", "scroll", "recycler")
+//        val tabLayoutMediator = TabLayoutMediator(tablayout, viewpager_view) { tab, position -> tab.text = labels[position] }
+//        tabLayoutMediator.attach()
+//        swipe_refresh_layout.setOnRefreshListener {
+//            swipe_refresh_layout.postDelayed({
+//                swipe_refresh_layout.isRefreshing = false
+//            }, 500)
+//        }
     }
 
     private fun getFragments(): ArrayList<Fragment> {

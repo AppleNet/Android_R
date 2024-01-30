@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.example.llc.android_r.scroll.common.NestedScrollingParentLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_refresh_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/kobe" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f0f"
+        android:text="@string/topStr" />
+
+    <com.example.llc.android_r.scroll.common.NestedScrollingChildLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/contenttv"
+            android:textColor="#FF334400"
+            android:textSize="24sp" />
+
+    </com.example.llc.android_r.scroll.common.NestedScrollingChildLayout>
+
+
+</com.example.llc.android_r.scroll.common.NestedScrollingParentLayout>
