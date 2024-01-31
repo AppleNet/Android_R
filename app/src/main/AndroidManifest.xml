@@ -47,6 +47,8 @@
         <activity android:name=".text.ViewPagerActivity"/>
         <activity android:name=".rv.RecyclerViewActivity"/>
         <activity android:name="com.example.llc.android_r.vp.ViewPagerActivity"/>
+        <activity android:name=".coordinatorlayout.CoordinatorLayoutActivity"/>
+        <activity android:name=".coordinatorlayout.BehaviorActivity"/>
     </application>
 
 </manifest>

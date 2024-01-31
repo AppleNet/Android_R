@@ -6,6 +6,8 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import com.example.llc.android_r.coordinatorlayout.BehaviorActivity
+import com.example.llc.android_r.coordinatorlayout.CoordinatorLayoutActivity
 import com.example.llc.android_r.flowlayout.FlowLayoutActivity
 import com.example.llc.android_r.room.RoomDbActivity
 import com.example.llc.android_r.rv.RecyclerViewActivity
@@ -81,7 +83,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, NestedScrollActivity::class.java))
         }
         textViewActivity.setOnClickListener {
-            startActivity(Intent(this, ViewPagerActivity::class.java))
+            startActivity(Intent(this, BehaviorActivity::class.java))
         }
     }
 

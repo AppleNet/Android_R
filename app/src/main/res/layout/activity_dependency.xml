@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.example.llc.android_r.coordinatorlayout.DependencyView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:layout_gravity="center"
+        android:text="我是科比"
+        android:textColor="@color/colorAccent"
+        app:layout_behavior=".coordinatorlayout.FollowBehavior"/>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
