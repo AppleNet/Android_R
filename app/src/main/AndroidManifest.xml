@@ -50,6 +50,7 @@
         <activity android:name=".coordinatorlayout.CoordinatorLayoutActivity"/>
         <activity android:name=".coordinatorlayout.BehaviorActivity"/>
         <activity android:name=".photo.PhotoViewActivity"/>
+        <activity android:name=".fish.FishActivity"/>
     </application>
 
 </manifest>

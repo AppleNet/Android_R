@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.llc.android_r.coordinatorlayout.BehaviorActivity
 import com.example.llc.android_r.coordinatorlayout.CoordinatorLayoutActivity
+import com.example.llc.android_r.fish.FishActivity
 import com.example.llc.android_r.flowlayout.FlowLayoutActivity
 import com.example.llc.android_r.photo.PhotoViewActivity
 import com.example.llc.android_r.room.RoomDbActivity
@@ -84,7 +85,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, NestedScrollActivity::class.java))
         }
         textViewActivity.setOnClickListener {
-            startActivity(Intent(this, PhotoViewActivity::class.java))
+            startActivity(Intent(this, FishActivity::class.java))
         }
     }
 
