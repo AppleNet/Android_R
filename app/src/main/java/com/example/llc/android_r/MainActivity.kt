@@ -10,6 +10,7 @@ import com.example.llc.android_r.coordinatorlayout.BehaviorActivity
 import com.example.llc.android_r.coordinatorlayout.CoordinatorLayoutActivity
 import com.example.llc.android_r.fish.FishActivity
 import com.example.llc.android_r.flowlayout.FlowLayoutActivity
+import com.example.llc.android_r.mvi.LoginActivity
 import com.example.llc.android_r.photo.PhotoViewActivity
 import com.example.llc.android_r.room.RoomDbActivity
 import com.example.llc.android_r.rv.RecyclerViewActivity
@@ -19,6 +20,7 @@ import com.example.llc.android_r.scope.StorageAccessFrameworkActivity
 import com.example.llc.android_r.screen.ScreenActivity
 import com.example.llc.android_r.scroll.NestedScrollActivity
 import com.example.llc.android_r.skin.SkinActivity
+import com.example.llc.android_r.tabs.TabActivity
 import com.example.llc.android_r.text.TextViewActivity
 import com.example.llc.android_r.vp.ViewPagerActivity
 import com.example.llc.android_r.webview.WebViewActivity
@@ -85,7 +87,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, NestedScrollActivity::class.java))
         }
         textViewActivity.setOnClickListener {
-            startActivity(Intent(this, FishActivity::class.java))
+            startActivity(Intent(this, LoginActivity::class.java))
         }
     }
 

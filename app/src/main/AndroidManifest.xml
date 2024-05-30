@@ -22,6 +22,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
+            android:exported="true"
             android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="IntentFilterExportedReceiver">
             <intent-filter>
@@ -51,6 +52,8 @@
         <activity android:name=".coordinatorlayout.BehaviorActivity"/>
         <activity android:name=".photo.PhotoViewActivity"/>
         <activity android:name=".fish.FishActivity"/>
+        <activity android:name=".tabs.TabActivity"/>
+        <activity android:name=".mvi.LoginActivity"/>
     </application>
 
 </manifest>

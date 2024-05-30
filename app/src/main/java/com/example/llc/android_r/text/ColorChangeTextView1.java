@@ -44,10 +44,6 @@ public class ColorChangeTextView1 extends View {
     public static final int DIRECTION_RIGHT = 1;
     public static final int DIRECTION_TOP = 2;
     public static final int DIRECTION_BOTTOM = 3;
-
-    ///////////////////////////////////////////////////////////////////////////
-    // 绘制
-    ///////////////////////////////////////////////////////////////////////////
     private Rect mTextBound = new Rect();
     private Paint mPaint;
     private int mTextWidth;
@@ -76,11 +72,6 @@ public class ColorChangeTextView1 extends View {
 
     private void init() {
         mPaint = new Paint();
-//        mLinePaint = new Paint();
-//        mLinePaint.setAntiAlias(true);
-//        mLinePaint.setStrokeWidth(dp2px(3));
-//        mLinePaint.setStyle(Paint.Style.STROKE);
-//        mLinePaint.setColor(Color.GREEN);
     }
 
     private void initAttr(final Context context, @Nullable final AttributeSet attrs) {
@@ -163,14 +154,6 @@ public class ColorChangeTextView1 extends View {
         Log.i(TAG, "mTextBound = " + mTextBound);
         mTextWidth = (int) (mPaint.measureText(mText) + .5f);
         Log.i(TAG, "mTextWidth = " + mTextWidth);
-
-//        Paint.FontMetrics fontMetrics = new Paint.FontMetrics();
-//
-//        mPaint.getFontMetrics(fontMetrics);
-//
-//        mTextHeight = (int) (fontMetrics.descent - fontMetrics.ascent + .5f);
-//        Log.i(TAG, "mTextHeight = " + mTextHeight);
-
     }
 
     @Override
@@ -240,24 +223,6 @@ public class ColorChangeTextView1 extends View {
         }
 
     }
-	/*
-                //1 先绘制改变的颜色的文字  ？
-                mPaint.setColor(mTextColorChange);
-                //起始
-                //绘制的终点
-                canvas.save();
-                canvas.clipRect(mTextStartX,0,(int)(mTextStartX + mProgress * mTextWidth),getMeasuredHeight());
-                canvas.drawRect(canvas.getClipBounds(),mLinePaint);
-                canvas.drawText(mText,mTextStartX
-                ,getMeasuredHeight()/2 - (mPaint.descent()/2 + mPaint.ascent()/2),mPaint);
-                canvas.restore();
-
-                //2.绘制没有改变 底色
-                mPaint.setColor(mTextColor);
-                canvas.save();
-                canvas.clipRect((int)(mTextStartX + mProgress * mTextWidth),0,mTextStartX + mTextWidth,getMeasuredHeight());
-                canvas.drawText(mText,mTextStartX,getMeasuredHeight()/2 - (mPaint.descent()/2 + mPaint.ascent()/2),mPaint);
-                canvas.restore();*/
 
     private void drawTextHorizontal(Canvas canvas, int color, int startX, int endX) {
         mPaint.setColor(color);

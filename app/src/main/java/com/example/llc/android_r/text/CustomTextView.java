@@ -49,9 +49,11 @@ public class CustomTextView extends AppCompatTextView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         drawCenterLineX(canvas);
+        drawCenterLineX1(canvas);
         drawCenterLineY(canvas);
-        drawTextBlack(canvas);
-        drawTextRed(canvas);
+        drawCenterLineY1(canvas);
+//        drawTextBlack(canvas);
+//        drawTextRed(canvas);
     }
 
     private void drawTextBlack(Canvas canvas) {
@@ -86,13 +88,25 @@ public class CustomTextView extends AppCompatTextView {
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.RED);
         paint.setStrokeWidth(3);
-        canvas.drawLine(getWidth() / 2,0, getWidth()/2, getHeight(), paint);
+        canvas.drawLine(getWidth() / 3,0, getWidth() / 3, getHeight(), paint);
+    }
+    private void drawCenterLineX1(Canvas canvas) {
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.RED);
+        paint.setStrokeWidth(3);
+        canvas.drawLine(2 * (getWidth() / 3),0, 2 * (getWidth() / 3), getHeight(), paint);
     }
 
     private void drawCenterLineY(Canvas canvas) {
         paint.setStyle(Paint.Style.FILL);
         paint.setColor(Color.RED);
         paint.setStrokeWidth(3);
-        canvas.drawLine(0,getHeight() / 2, getWidth(), getHeight() / 2, paint);
+        canvas.drawLine(0,getHeight() / 3, getWidth(), getHeight() / 3, paint);
+    }
+    private void drawCenterLineY1(Canvas canvas) {
+        paint.setStyle(Paint.Style.FILL);
+        paint.setColor(Color.RED);
+        paint.setStrokeWidth(3);
+        canvas.drawLine(0,2* (getHeight() / 3), getWidth(), 2* (getHeight() / 3), paint);
     }
 }
