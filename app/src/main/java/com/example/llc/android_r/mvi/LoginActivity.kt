@@ -17,7 +17,6 @@ import com.example.llc.android_r.mvi.intent.LoginViewAction
 import com.example.llc.android_r.mvi.intent.LoginViewEvent
 import com.example.llc.android_r.mvi.intent.LoginViewState
 import com.example.llc.android_r.mvi.model.LoginViewModel
-import com.example.llc.kotlin.login
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.map
@@ -59,9 +58,10 @@ class LoginActivity: AppCompatActivity() {
 
     private fun initViewStates() {
         viewModel.viewStates.let { states ->
-//            states.observeState(this, LoginViewState::userName) {
-//
-//            }
+            states.observeState(this, LoginViewState::userName) {
+                userName.setText(it)
+                userName.setSelection(it.length)
+            }
             lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     states.map {
@@ -72,7 +72,10 @@ class LoginActivity: AppCompatActivity() {
                     }
                 }
             }
-
+            states.observeState(this, LoginViewState::password){
+                passWord.setText(it)
+                passWord.setSelection(it.length)
+            }
             lifecycleScope.launch {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
                     states.map {

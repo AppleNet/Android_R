@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.llc.android_r.mvi.intent.LoginViewAction
 import com.example.llc.android_r.mvi.intent.LoginViewEvent
 import com.example.llc.android_r.mvi.intent.LoginViewState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -55,11 +56,14 @@ class LoginViewModel: ViewModel() {
     }
 
     private fun login() {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.Main) {
             flow {
-                loginLogic()
-                emit("登录成功")
-            }.onStart {
+                if (loginLogic()) {
+                    emit("登录成功")
+                } else {
+                    emit("登录失败")
+                }
+            }.flowOn(Dispatchers.IO).onStart {
 //                _viewEvent.setEvent(LoginViewEvent.ShowLoadingDialog)
                 _viewEvent.emit(LoginViewEvent.ShowLoadingDialog)
             }.onEach {
@@ -79,14 +83,15 @@ class LoginViewModel: ViewModel() {
         }
     }
 
-    private suspend fun loginLogic() {
+    private suspend fun loginLogic(): Boolean {
         viewStates.value.let {
+            // 执行 http 请求
             if (it.userName == "Kobe" && it.password == "123456") {
                 delay(2000)
+                return true
             } else {
-                throw Exception("用户名或者密码不正确")
+                return false
             }
         }
     }
-
 }
